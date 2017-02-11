@@ -1,7 +1,15 @@
 <div class="box-body">
-    @include('media::admin.fields.file-link', [
-	    'entityClass' => 'Modules\\\\Gallery\\\\Entities\\\\Gallery',
-	    'entityId' => $g->id,
-	    'zone' => 'gallery'
-	])
+    <div class='{{ $errors->has("{$lang}.title") ? ' has-error' : '' }} form-group'>
+        {!! Form::label("{$lang}[title]", trans('galleries::galleries.form.title')) !!}
+        <?php $old = $g->hasTranslation($lang) ? $g->translate($lang)->title : '' ?>
+        <input class="form-control" type="text" name="{{$lang}}[title]" value="{{ old("{$lang}.title",$old) }}" />
+        {!! $errors->first("{$lang}.title", '<span class="help-block">:message</span>') !!}
+    </div>
+
+    <div class='{{ $errors->has("{$lang}.description") ? ' has-error' : '' }} form-group'>
+        {!! Form::label("{$lang}[description]", trans('galleries::galleries.form.description')) !!}
+        <?php $old = $g->hasTranslation($lang) ? $g->translate($lang)->description : '' ?>
+        <textarea class="ckeditor" name="{{$lang}}[description]" >{{ old("{$lang}.description",$old) }}</textarea>
+        {!! $errors->first("{$lang}.description", '<span class="help-block">:message</span>') !!}
+    </div>
 </div>

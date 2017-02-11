@@ -3,6 +3,7 @@
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Modules\Gallery\Entities\Gallery;
+use Modules\Gallery\Http\Requests\StoreGallery;
 use Modules\Gallery\Repositories\GalleryRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Media\Repositories\FileRepository;
@@ -52,7 +53,7 @@ class GalleryController extends AdminBaseController
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreGallery $request)
     {
         $this->gallery->create($request->all());
 
@@ -83,7 +84,6 @@ class GalleryController extends AdminBaseController
     public function update(Gallery $gallery, Request $request)
     {
         $this->gallery->update($gallery, $request->all());
-
         flash()->success(trans('core::core.messages.resource updated', ['name' => trans('gallery::galleries.title.galleries')]));
 
         return redirect()->route('admin.gallery.gallery.index');

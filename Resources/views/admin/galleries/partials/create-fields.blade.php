@@ -1,5 +1,13 @@
 <div class="box-body">
-    @include('media::admin.fields.new-file-link-single', [
-	    'zone' => 'gallery'
-	])
+    <div class='{{ $errors->has("{$lang}.title") ? ' has-error' : '' }} form-group'>
+        {!! Form::label("{$lang}[title]", trans('galleries::galleries.form.title')) !!}
+        <input class="form-control" type="text" name="{{$lang}}[title]" value="{{ old("{$lang}.title") }}" />
+        {!! $errors->first("{$lang}.title", '<span class="help-block">:message</span>') !!}
+    </div>
+
+    <div class='{{ $errors->has("{$lang}.description") ? ' has-error' : '' }} form-group'>
+        {!! Form::label("{$lang}[description]", trans('galleries::galleries.form.description')) !!}
+        <textarea class="ckeditor" name="{{$lang}}[description]" >{{ old("{$lang}.description") }}</textarea>
+        {!! $errors->first("{$lang}.description", '<span class="help-block">:message</span>') !!}
+    </div>
 </div>
