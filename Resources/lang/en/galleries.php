@@ -10,11 +10,19 @@ return [
         'create gallery' => 'Create a gallery',
     ],
     'table' => [
+        'image' => 'Image'
     ],
     'form' => [
+        'url' => 'Link (url)',
+        'title' => 'Title',
+        'description' => 'Description'
     ],
     'messages' => [
     ],
     'validation' => [
+
     ],
+    'attributes' => [
+       'gallery' => 'gallery image'
+    ]
 ];

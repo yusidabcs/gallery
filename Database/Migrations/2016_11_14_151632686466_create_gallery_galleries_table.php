@@ -15,8 +15,8 @@ class CreateGalleryGalleriesTable extends Migration
 		Schema::create('gallery__galleries', function(Blueprint $table) {
 			$table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('title')->nullable();
             $table->string('url')->nullable();
+            $table->string('target')->nullable();
             // Your fields
 		});
 	}

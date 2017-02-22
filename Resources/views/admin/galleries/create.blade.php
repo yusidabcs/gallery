@@ -25,19 +25,21 @@
                         'zone' => 'gallery'
                     ])
                     {!! $errors->first("medias_single.gallery", '<span class="help-block text-warning">:message</span>') !!}
-                </div>
-                <div class='{{ $errors->has("url") ? ' has-error' : '' }} form-group'>
-                    {!! Form::label("[url]", trans('galleries::galleries.form.url')) !!}
-                    <input class="form-control"  type="text" name="url" value="{{ old("url") }}"/>
-                    {!! $errors->first("{url", '<span class="help-block">:message</span>') !!}
-                </div>
 
-                <div class="form-group">
-                    <label for="target">{{ trans('menu::menu-items.form.target') }}</label>
-                    <select class="form-control" name="target" id="target">
-                        <option value="_self" {{ old('target') == '_self' ? 'selected' : '' }}>{{ trans('menu::menu-items.form.same tab') }}</option>
-                        <option value="_blank" {{ old('target') == '_blank' ? 'selected' : '' }}>{{ trans('menu::menu-items.form.new tab') }}</option>
-                    </select>
+                    <div class='{{ $errors->has("url") ? ' has-error' : '' }} form-group'>
+                        {!! Form::label("[url]", trans('gallery::galleries.form.url')) !!}
+                        <input class="form-control"  type="text" name="url" value="{{ old("url") }}"/>
+                        {!! $errors->first("{url", '<span class="help-block">:message</span>') !!}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target">{{ trans('menu::menu-items.form.target') }}</label>
+                        <select class="form-control" name="target" id="target">
+                            <option value="_self" {{ old('target') == '_self' ? 'selected' : '' }}>{{ trans('menu::menu-items.form.same tab') }}</option>
+                            <option value="_blank" {{ old('target') == '_blank' ? 'selected' : '' }}>{{ trans('menu::menu-items.form.new tab') }}</option>
+                        </select>
+                    </div>
+                    
                 </div>
             </div>
             <div class="nav-tabs-custom">

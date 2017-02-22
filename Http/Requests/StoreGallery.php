@@ -34,4 +34,11 @@ class StoreGallery extends BaseFormRequest  {
         ];
     }
 
+    public function attributes()
+    {
+        return [
+            'medias_single.gallery' => trans('gallery::galleries.attributes.gallery')
+        ];
+    }
+
 }

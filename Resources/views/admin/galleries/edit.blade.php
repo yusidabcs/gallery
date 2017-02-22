@@ -18,9 +18,6 @@
 @section('content')
     {!! Form::open(['route' => ['admin.gallery.gallery.update', $g->id], 'method' => 'put']) !!}
     <div class="row">
-
-
-
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-body {{ $errors->has("medias_single.gallery") ? ' has-error' : '' }}">
@@ -33,7 +30,7 @@
                     {!! $errors->first("medias_single.gallery", '<span class="help-block text-warning">:message</span>') !!}
 
                     <div class='{{ $errors->has("url") ? ' has-error' : '' }} form-group'>
-                        {!! Form::label("[url]", trans('galleries::galleries.form.url')) !!}
+                        {!! Form::label("[url]", trans('gallery::galleries.form.url')) !!}
                         <input class="form-control"  type="text" name="url" value="{{ old("url",$g->url) }}"/>
                         {!! $errors->first("{url", '<span class="help-block">:message</span>') !!}
                     </div>
