@@ -35,4 +35,8 @@ class EloquentGalleryRepository extends EloquentBaseRepository implements Galler
 
         return $model->delete();
     }
+
+    public function first(){
+        return $this->model->first();
+    }
 }
