@@ -24,5 +24,12 @@ return [
     ],
     'attributes' => [
        'gallery' => 'gallery image'
-    ]
+    ],
+
+    'list resource' => 'List gallery',
+    'create resource' => 'Create gallery',
+    'store resource' => 'Save gallery',
+    'edit resource' => 'Edit gallery',
+    'update resource' => 'Update gallery',
+    'destroy resource' => 'Delete gallery',
 ];

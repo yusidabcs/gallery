@@ -21,9 +21,9 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-body {{ $errors->has("medias_single.gallery") ? ' has-error' : '' }}">
-                    @include('media::admin.fields.new-file-link-single', [
-                        'zone' => 'gallery'
-                    ])
+
+                    @mediaSingle('gallery')
+
                     {!! $errors->first("medias_single.gallery", '<span class="help-block text-warning">:message</span>') !!}
 
                     <div class='{{ $errors->has("url") ? ' has-error' : '' }} form-group'>

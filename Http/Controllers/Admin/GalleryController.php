@@ -57,9 +57,8 @@ class GalleryController extends AdminBaseController
     {
         $this->gallery->create($request->all());
 
-        flash()->success(trans('core::core.messages.resource created', ['name' => trans('gallery::galleries.title.galleries')]));
-
-        return redirect()->route('admin.gallery.gallery.index');
+        return redirect()->route('admin.gallery.gallery.index')
+            ->withSuccess(trans('gallery::messages.gallery created'));
     }
 
     /**
@@ -69,8 +68,7 @@ class GalleryController extends AdminBaseController
      * @return Response
      */
     public function edit(Gallery $g)
-    {   
-        $gallery = $this->file->findFileByZoneForEntity('gallery', $g);
+    {
         return view('gallery::admin.galleries.edit', compact('g','gallery'));
     }
 
@@ -84,9 +82,9 @@ class GalleryController extends AdminBaseController
     public function update(Gallery $gallery, Request $request)
     {
         $this->gallery->update($gallery, $request->all());
-        flash()->success(trans('core::core.messages.resource updated', ['name' => trans('gallery::galleries.title.galleries')]));
 
-        return redirect()->route('admin.gallery.gallery.index');
+        return redirect()->route('admin.gallery.gallery.index')
+            ->withSuccess(trans('gallery::messages.gallery updated'));
     }
 
     /**
@@ -99,8 +97,6 @@ class GalleryController extends AdminBaseController
     {
         $this->gallery->destroy($gallery);
 
-        flash()->success(trans('core::core.messages.resource deleted', ['name' => trans('gallery::galleries.title.galleries')]));
-
-        return redirect()->route('admin.gallery.gallery.index');
+        return redirect()->route('admin.gallery.gallery.index')->withSuccess(trans('gallery::messages.gallery deleted'));
     }
 }
