@@ -11,4 +11,14 @@ return [
             },
         ],
     ],
+    'galleryNormalThumb' => [
+        'resize' => [
+            'width' => 700,
+            'height' => null,
+            'callback' => function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            },
+        ],
+    ],
 ];
