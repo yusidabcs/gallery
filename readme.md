@@ -1,10 +1,13 @@
 ##Helpers
 
+###INSTALATION
+	composer require yusidabcs/gallery
+
 #get_galleries
-untuk menampilkan semua galleri dengan limit tertentu
+	untuk menampilkan semua galleri dengan limit tertentu
 
 #get_gallery_tags
-untuk menampilkan semua tag pada gallery
+	untuk menampilkan semua tag pada gallery
 
 #get_gallery_image
-untuk menampilkan gambar dari gallery
+	untuk menampilkan gambar dari gallery
