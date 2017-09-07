@@ -6,7 +6,7 @@ use Modules\Media\Support\Traits\MediaRelation;
 
 class Gallery extends Model
 {
-	use MediaRelation;
+    use MediaRelation;
     use Translatable;
 
     protected $table = 'gallery__galleries';
@@ -14,15 +14,19 @@ class Gallery extends Model
     public $translatedAttributes = [
         'title',
         'description',
+        'tags'
 
     ];
     protected $fillable = [
 
         'url',
         'target',
+        'slideshow',
+        'tag',
 
         'title',
-        'description'
+        'description',
+        'tags'
 
     ];
     public $timestamps = false;

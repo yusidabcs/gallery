@@ -11,4 +11,9 @@ class CacheGalleryDecorator extends BaseCacheDecorator implements GalleryReposit
         $this->entityName = 'gallery.galleries';
         $this->repository = $gallery;
     }
+
+    public function all()
+    {
+        return $this->repository->all();
+    }
 }

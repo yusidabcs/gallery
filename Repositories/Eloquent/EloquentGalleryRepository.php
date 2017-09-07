@@ -11,7 +11,7 @@ class EloquentGalleryRepository extends EloquentBaseRepository implements Galler
 
 	public function all()
 	{
-		return $this->model->all();
+		return $this->model->orderBy('id','desc')->get();
 	}
 	public function create($data)
     {
@@ -23,8 +23,7 @@ class EloquentGalleryRepository extends EloquentBaseRepository implements Galler
     public function update($model, $data)
     {
         $model->update($data);
-
-        event(new GalleryWasUpdated($model->id, $data));
+        event(new GalleryWasUpdated($model, $data));
 
         return $model;
     }

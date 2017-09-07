@@ -15,9 +15,14 @@ return [
     'form' => [
         'url' => 'Link (url)',
         'title' => 'Title',
-        'description' => 'Description'
+        'description' => 'Description',
+        'tag'   =>  'Tag',
+        'tags'  => 'Tag name'
     ],
     'messages' => [
+      'gallery updated' => 'Gallery successfully updated',
+      'gallery created' => 'Gallery successfully creatd',
+      'gallery deleted' => 'Gallery successfully deleted',
     ],
     'validation' => [
 
