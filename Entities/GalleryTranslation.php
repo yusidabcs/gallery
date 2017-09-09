@@ -17,7 +17,8 @@ class GalleryTranslation extends Model
     protected $fillable = [
 
         'title',
-        'description'
+        'description',
+        'tags'
     ];
 
 }

@@ -1,20 +1,16 @@
 <?php namespace Modules\Gallery\Tests;
 
-use Faker\Factory;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Maatwebsite\Sidebar\SidebarServiceProvider;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider;
 use Modules\Core\Providers\CoreServiceProvider;
 use Modules\Gallery\Providers\GalleryServiceProvider;
 use Modules\Gallery\Repositories\GalleryRepository;
-use Modules\Menu\Providers\MenuServiceProvider;
-use Modules\Menu\Repositories\MenuItemRepository;
 use Modules\Menu\Repositories\MenuRepository;
 use Orchestra\Testbench\TestCase;
-use Pingpong\Modules\ModulesServiceProvider;
+use Nwidart\Modules\LaravelModulesServiceProvider;
 
 abstract class BaseGalleryTest extends TestCase
 {
@@ -38,7 +34,7 @@ abstract class BaseGalleryTest extends TestCase
     protected function getPackageProviders($app)
     {
         return [
-            ModulesServiceProvider::class,
+            LaravelModulesServiceProvider::class,
             CoreServiceProvider::class,
             GalleryServiceProvider::class,
             LaravelLocalizationServiceProvider::class,
@@ -74,7 +70,6 @@ abstract class BaseGalleryTest extends TestCase
         // Makes sure the migrations table is created
         $artisan->call('migrate', [
             '--database' => 'sqlite',
-            '--path'     => $migrationsPath,
         ]);
         // We empty all tables
         $artisan->call('migrate:reset', [
@@ -83,7 +78,10 @@ abstract class BaseGalleryTest extends TestCase
         // Migrate
         $artisan->call('migrate', [
             '--database' => 'sqlite',
-            '--path'     => $migrationsPath,
+        ]);
+        $artisan->call('migrate', [
+            '--database' => 'sqlite',
+            '--path'     => 'Modules/Tag/Database/Migrations',
         ]);
     }
 

@@ -41,4 +41,15 @@ class StoreGallery extends BaseFormRequest  {
         ];
     }
 
+    public function all()
+    {
+    	$input = parent::all();
+    	if(!array_key_exists('slideshow', $input))
+    	{
+    		$input['slideshow'] = 0;
+    	}
+
+    	return $input;
+    }
+
 }

@@ -7,6 +7,7 @@ use Modules\Gallery\Http\Requests\StoreGallery;
 use Modules\Gallery\Repositories\GalleryRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Media\Repositories\FileRepository;
+use Nwidart\Modules\Facades\Module;
 
 
 class GalleryController extends AdminBaseController
@@ -23,6 +24,12 @@ class GalleryController extends AdminBaseController
 
         $this->gallery = $gallery;
         $this->file = $file;
+
+        $this->assetManager->addAssets([
+            'bootstrap3-typehead.min.js' => Module::asset('gallery:js/bootstrap3-typehead.min.js'),
+        ]);
+
+        $this->assetPipeline->requireJs('bootstrap3-typehead.min.js');
     }
 
     /**
@@ -44,7 +51,11 @@ class GalleryController extends AdminBaseController
      */
     public function create()
     {
-        return view('gallery::admin.galleries.create');
+        $galleries = Gallery::where('tag','!=',null)->orWhere('tag','!=','')->groupBy('tag')->get();
+        $tags = $galleries->map(function ($user) {
+            return $user->tag;
+        });
+        return view('gallery::admin.galleries.create',compact('tags'));
     }
 
     /**
@@ -57,9 +68,8 @@ class GalleryController extends AdminBaseController
     {
         $this->gallery->create($request->all());
 
-        flash()->success(trans('core::core.messages.resource created', ['name' => trans('gallery::galleries.title.galleries')]));
-
-        return redirect()->route('admin.gallery.gallery.index');
+        return redirect()->route('admin.gallery.gallery.index')
+            ->withSuccess(trans('gallery::galleries.messages.gallery created'));
     }
 
     /**
@@ -69,9 +79,12 @@ class GalleryController extends AdminBaseController
      * @return Response
      */
     public function edit(Gallery $g)
-    {   
-        $gallery = $this->file->findFileByZoneForEntity('gallery', $g);
-        return view('gallery::admin.galleries.edit', compact('g','gallery'));
+    {
+        $galleries = Gallery::where('tag','!=',null)->orWhere('tag','!=','')->groupBy('tag')->get();
+        $tags = $galleries->map(function ($user) {
+            return $user->tag;
+        });
+        return view('gallery::admin.galleries.edit', compact('g','gallery','tags'));
     }
 
     /**
@@ -84,9 +97,9 @@ class GalleryController extends AdminBaseController
     public function update(Gallery $gallery, Request $request)
     {
         $this->gallery->update($gallery, $request->all());
-        flash()->success(trans('core::core.messages.resource updated', ['name' => trans('gallery::galleries.title.galleries')]));
 
-        return redirect()->route('admin.gallery.gallery.index');
+        return redirect()->route('admin.gallery.gallery.index')
+            ->withSuccess(trans('gallery::galleries.messages.gallery updated'));
     }
 
     /**
@@ -98,9 +111,11 @@ class GalleryController extends AdminBaseController
     public function destroy(Gallery $gallery)
     {
         $this->gallery->destroy($gallery);
-
-        flash()->success(trans('core::core.messages.resource deleted', ['name' => trans('gallery::galleries.title.galleries')]));
-
-        return redirect()->route('admin.gallery.gallery.index');
+        if(request()->ajax()){
+            return response()->json([
+               'message' => trans('gallery::galleries.messages.gallery deleted')
+            ]);
+        }
+        return redirect()->route('admin.gallery.gallery.index')->withSuccess(trans('gallery::galleries.messages.gallery deleted'));
     }
 }
