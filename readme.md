@@ -1,26 +1,23 @@
-#Asgard cms module to create gallery
+Asgard cms module to create gallery
 
-##Instalation
+##  Instalation
+    composer require bcscoder/gallery
 
-  composer require bcscoder/gallery
+##  Helpers
 
-##Helpers
+#####  get_galleries($slideshow,$limit, $options)
+To get all the gallery images
+Parameter
+- $slideshow = slideshow status, default is null
+- $limit = how many gallery to take, default is null to return all gallery
+- $options : array options
+  - tags (string) filter gallery by its tag key
+ 	
 
-  get_galleries($slideshow,$limit, $options)
+#####  get_gallery_tags($gallery)
+Helper to get gallery tag, pass gallery object
 
-    To get all the gallery images Parameter
+#####  get_gallery_image($gallery, $thumbnail)
+Helper to get gallery image, pass gallery object
+- $thumbnail (string) default value is null to get the real size image 
 
-    $slideshow = slideshow status, default is null
-    $limit = how many gallery to take, default is null to return all gallery
-    $options : array options
-    tags (string) filter gallery by its tag key
-
-    get_gallery_tags($gallery)
-
-    Helper to get gallery tag, pass gallery object
-
-    get_gallery_image($gallery, $thumbnail)
-
-    Helper to get gallery image, pass gallery object
-
-    $thumbnail (string) default value is null to get the real size image

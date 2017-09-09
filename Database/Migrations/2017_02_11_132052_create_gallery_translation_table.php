@@ -18,6 +18,7 @@ class CreateGalleryTranslationTable extends Migration {
             $table->increments('id');
             $table->text('title')->nullable();
             $table->text('description')->nullable();
+            $table->string('tags')->nullable();
 
             $table->integer('gallery_id')->unsigned();
             $table->string('locale')->index();

@@ -1,16 +1,23 @@
 <?php
 
-function get_galleries($slideshow = null,$limit = null){
+function get_galleries($slideshow = null,$limit = null, $options = []){
 
+    $gallery = new Modules\Gallery\Entities\Gallery();
+
+    if(array_key_exists('tags',$options)){
+        $gallery = $gallery->where('tag',$options['tags']);
+    }
 	if($slideshow == 1)
 	{
 	    if($limit == null)
-            return Modules\Gallery\Entities\Gallery::where('slideshow',1)->get();
-		return Modules\Gallery\Entities\Gallery::where('slideshow',1)->paginate($limit);
+            return $gallery->where('slideshow',1)->get();
+		return $gallery->where('slideshow',1)->paginate($limit);
 	}
+
 	if($limit == null)
-	    return Modules\Gallery\Entities\Gallery::all();
-    return Modules\Gallery\Entities\Gallery::paginate($limit);
+	    return $gallery->get();
+    return $gallery->paginate($limit);
+
 }
 function get_gallery_tags(){
     return Modules\Gallery\Entities\Gallery::groupBy('tag')->get();
