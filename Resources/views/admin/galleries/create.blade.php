@@ -39,6 +39,18 @@
                             <option value="_blank" {{ old('target') == '_blank' ? 'selected' : '' }}>{{ trans('menu::menu-items.form.new tab') }}</option>
                         </select>
                     </div>
+
+                    <div class='{{ $errors->has("tag") ? ' has-error' : '' }} form-group'>
+                        {!! Form::label("[tag]", trans('gallery::galleries.form.tag')) !!}
+                        <input class="form-control"  type="text" name="tag" id="typehead" autocomplete="off" value="{{ old("tag") }}"/>
+                        {!! $errors->first("{tag", '<span class="help-block">:message</span>') !!}
+                    </div>
+                    <div class="checkbox" style="margin-left: 20px">
+                        <label>
+                          <input type="checkbox" value="1" name="slideshow" {{ old('slideshow') == 1 ? 'checked' : '' }}> Slideshow
+                        </label>
+                      </div>
+                
                     
                 </div>
             </div>
@@ -89,9 +101,9 @@
     </script>
     <script>
         $( document ).ready(function() {
-            $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
-                checkboxClass: 'icheckbox_flat-blue',
-                radioClass: 'iradio_flat-blue'
+            $(document).ready(function () {
+                var subjects = {!! ($tags ) !!};
+                $('#typehead').typeahead({source: subjects})
             });
         });
     </script>

@@ -5,8 +5,10 @@
         {{ trans('gallery::galleries.title.edit gallery') }}
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> {{ trans('core::core.breadcrumb.home') }}</a></li>
-        <li><a href="{{ route('admin.gallery.gallery.index') }}">{{ trans('gallery::galleries.title.galleries') }}</a></li>
+        <li><a href="{{ route('dashboard.index') }}"><i
+                        class="fa fa-dashboard"></i> {{ trans('core::core.breadcrumb.home') }}</a></li>
+        <li><a href="{{ route('admin.gallery.gallery.index') }}">{{ trans('gallery::galleries.title.galleries') }}</a>
+        </li>
         <li class="active">{{ trans('gallery::galleries.title.edit gallery') }}</li>
     </ol>
 @stop
@@ -28,7 +30,7 @@
 
                     <div class='{{ $errors->has("url") ? ' has-error' : '' }} form-group'>
                         {!! Form::label("[url]", trans('gallery::galleries.form.url')) !!}
-                        <input class="form-control"  type="text" name="url" value="{{ old("url",$g->url) }}"/>
+                        <input class="form-control" type="text" name="url" value="{{ old("url",$g->url) }}"/>
                         {!! $errors->first("{url", '<span class="help-block">:message</span>') !!}
                     </div>
 
@@ -39,6 +41,23 @@
                             <option value="_blank" {{ old('target',$g->target) == '_blank' ? 'selected' : '' }}>{{ trans('menu::menu-items.form.new tab') }}</option>
                         </select>
 
+                    </div>
+
+                    <div class='{{ $errors->has("tag") ? ' has-error' : '' }} form-group'>
+                        {!! Form::label("[tag]", trans('gallery::galleries.form.tag')) !!}
+                        <input class="form-control" type="text" name="tag" id="typehead" autocomplete="off" value="{{ old("tag",$g->tag) }}"/>
+                        {!! $errors->first("{tag", '<span class="help-block">:message</span>') !!}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="checkbox" style="margin-left: 20px">
+                                <label>
+                                    <input type="checkbox" value="1"
+                                           name="slideshow" {{ old('slideshow',$g->slideshow) == 1 ? 'checked' : '' }}>
+                                    Slideshow
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,9 +74,13 @@
                     @endforeach
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary btn-flat">{{ trans('core::core.button.update') }}</button>
-                        <button class="btn btn-default btn-flat" name="button" type="reset">{{ trans('core::core.button.reset') }}</button>
-                        <a class="btn btn-danger pull-right btn-flat" href="{{ route('admin.gallery.gallery.index')}}"><i class="fa fa-times"></i> {{ trans('core::core.button.cancel') }}</a>
+                        <button type="submit"
+                                class="btn btn-primary btn-flat">{{ trans('core::core.button.update') }}</button>
+                        <button class="btn btn-default btn-flat" name="button"
+                                type="reset">{{ trans('core::core.button.reset') }}</button>
+                        <a class="btn btn-danger pull-right btn-flat"
+                           href="{{ route('admin.gallery.gallery.index')}}"><i
+                                    class="fa fa-times"></i> {{ trans('core::core.button.cancel') }}</a>
                     </div>
                 </div>
             </div> {{-- end nav-tabs-custom --}}
@@ -78,20 +101,18 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $( document ).ready(function() {
+        $(document).ready(function () {
             $(document).keypressAction({
                 actions: [
-                    { key: 'b', route: "<?= route('admin.gallery.gallery.index') ?>" }
+                    {key: 'b', route: "<?= route('admin.gallery.gallery.index') ?>"}
                 ]
             });
         });
     </script>
     <script>
-        $( document ).ready(function() {
-            $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
-                checkboxClass: 'icheckbox_flat-blue',
-                radioClass: 'iradio_flat-blue'
-            });
+        $(document).ready(function () {
+            var subjects = {!! ($tags ) !!};
+            $('#typehead').typeahead({source: subjects})
         });
     </script>
 @stop

@@ -14,15 +14,19 @@ class Gallery extends Model
     public $translatedAttributes = [
         'title',
         'description',
+        'tags'
 
     ];
     protected $fillable = [
 
         'url',
         'target',
+        'slideshow',
+        'tag',
 
         'title',
-        'description'
+        'description',
+        'tags'
 
     ];
     public $timestamps = false;

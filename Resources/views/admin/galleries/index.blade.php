@@ -28,6 +28,7 @@
                     <table class="data-table table table-bordered table-hover">
                         <thead>
                         <tr>
+                            <th ><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
                             <th>{{ trans('gallery::galleries.table.image') }}</th>
                             <th data-sortable="false">{{ trans('core::core.table.actions') }}</th>
                         </tr>
@@ -35,18 +36,19 @@
                         <tbody>
                         <?php if (isset($galleries)): ?>
                         <?php foreach ($galleries as $gallery): ?>
-                        <tr>
+                        <tr id="table_{{ $gallery->id }}">
+                            <td><input type="checkbox" value="{{ $gallery->id }}"></td>
                             <td>
                                 <a href="{{ route('admin.gallery.gallery.edit', [$gallery->id]) }}">
                                     <img src="{{ $gallery->files->first() ? 
-                                    Imagy::getThumbnail($gallery->files->first()->path_string, 'mediumThumb') : 
+                                    Imagy::getThumbnail($gallery->files->first()->path_string, 'smallThumb') :
                                     '' }}" class="img img-responsive">
                                 </a>
                             </td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{{ route('admin.gallery.gallery.edit', [$gallery->id]) }}" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
-                                    <button class="btn btn-danger btn-flat" data-toggle="modal" data-target="#modal-delete-confirmation" data-action-target="{{ route('admin.gallery.gallery.destroy', [$gallery->id]) }}"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-flat btn-delete" data-toggle="modal" data-target="#modal-delete-confirmation" data-action-target="{{ route('admin.gallery.gallery.destroy', [$gallery->id]) }}"><i class="fa fa-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -55,6 +57,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <th></th>
                             <th>{{ trans('core::core.table.created at') }}</th>
                             <th>{{ trans('core::core.table.actions') }}</th>
                         </tr>
@@ -92,7 +95,7 @@
     <?php $locale = locale(); ?>
     <script type="text/javascript">
         $(function () {
-            $('.data-table').dataTable({
+            var table = $('.data-table').DataTable({
                 "paginate": true,
                 "lengthChange": true,
                 "filter": true,
@@ -102,7 +105,59 @@
                 "order": [[ 0, "desc" ]],
                 "language": {
                     "url": '<?php echo Module::asset("core:js/vendor/datatables/{$locale}.json") ?>'
+                },
+                "columnDefs": [ {
+                    "targets": 0,
+                    "orderable": false
+                } ],
+                dom: 'l<"toolbar">frtip',
+                initComplete: function(){
+                    $("div.toolbar")
+                            .html('<button type="button" id="delete-all" style="margin-left:10px;float:right" class="btn btn-sm btn-danger">Delete All!</button>');
                 }
+            });
+
+            // Handle click on "Select all" control
+            $('#example-select-all').on('click', function(){
+                // Get all rows with search applied
+                // Check/uncheck checkboxes for all rows in the table
+                $('input[type="checkbox"]').prop('checked', this.checked);
+            });
+
+            // Handle form submission event
+            $(document).on('click','#delete-all', function(e) {
+                // Iterate over all checkboxes in the table
+                if (!window.confirm('Delete all checked file?')) {
+                    return false;
+                }
+                var btn = this;
+                $(btn).button('loading');
+
+                var rs = [];
+                $('input[type="checkbox"]').each(function () {
+                    // If checkbox doesn't exist in DOM
+                    if (this.checked) {
+                        // Create a hidden element
+                        var url = ($('#table_' + this.value).find('.btn-delete').attr('data-action-target'))
+                        var id = this.value;
+                        $.ajax({
+                            type: 'DELETE',
+                            url: url,
+                            data: {
+                                '_method': 'DELETE',
+                                '_token': '{{ csrf_token() }}'
+                            },
+                            success: function (data) {
+                                table.row($('#table_' + id)).remove().draw();
+                                $(btn).button('reset');
+                            },
+                            error: function (status) {
+                                $(btn).button('reset');
+                            }
+                        });
+
+                    }
+                });
             });
         });
     </script>
