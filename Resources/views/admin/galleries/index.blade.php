@@ -113,7 +113,7 @@
                 dom: 'l<"toolbar">frtip',
                 initComplete: function(){
                     $("div.toolbar")
-                            .html('<button type="button" id="delete-all" style="margin-left:10px;float:left" class="btn btn-sm btn-danger">Delete All!</button>');
+                      .html('<button type="button" id="delete-all" style="margin-left:10px;float:left" class="btn btn-sm btn-danger">Delete All!</button>');
                 }
             });
 

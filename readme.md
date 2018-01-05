@@ -20,3 +20,4 @@ Helper to get gallery tag, pass gallery object
 #####  get_gallery_image($gallery, $thumbnail)
 Helper to get gallery image, pass gallery object
 - $thumbnail (string) default value is null to get the real size image 
+

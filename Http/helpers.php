@@ -17,6 +17,7 @@ function get_galleries($slideshow = null,$limit = null, $options = []){
 	if($limit == null)
 	    return $gallery->get();
     return $gallery->paginate($limit);
+
 }
 function get_gallery_tags(){
     return Modules\Gallery\Entities\Gallery::groupBy('tag')->get();
