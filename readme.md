@@ -1,23 +1,26 @@
-Module for creating your own gallery image.
+Asgard cms module to create your own gallery
 
+##  Instalation
+    composer require bcscoder/gallery
 
-##Instalation
+##  Helpers
 
-composer require bcscoder/gallery
+#####  get_galleries($slideshow,$limit, $options)
+To get all the gallery images
+Parameter
+- $slideshow = slideshow status, default is null
+- $limit = how many gallery to take, default is null to return all gallery
+- $options : array options
+  - tags (string) filter gallery by its tag key
 
-##Available Helpers
-- get_galleries($slideshow,$limit,$options[])
+#### get_home_galleries($limit)
+To get gallery for homepage.
+Parameter
+- $limit = show how many galleries are shown, default is 12
 
-pass 1 to slideshow, it will show you gallery for your slider.
+#####  get_gallery_tags($gallery)
+Helper to get gallery tag, pass gallery object
 
-- get_home_gallery($limit)
-
-it will list all galleries with limit for each tags.
-
-- get_gallery_tags()
-
-it will list all tags of the gallery
-
-- gallery_image($gallery, $size = null)
-
-it will return the thumbnail of the gallery, and alse you can pass size of thumbnail
+#####  get_gallery_image($gallery, $thumbnail)
+Helper to get gallery image, pass gallery object
+- $thumbnail (string) default value is null to get the real size image
