@@ -20,4 +20,4 @@ it will list all tags of the gallery
 
 - gallery_image($gallery, $size = null)
 
-it will return the thumnail of the gallery, and alse you can pass size of thumbnail
+it will return the thumbnail of the gallery, and alse you can pass size of thumbnail
