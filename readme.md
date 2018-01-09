@@ -1,13 +1,23 @@
-##Helpers
+Module for creating your own gallery image.
 
-###INSTALATION
-	composer require yusidabcs/gallery
 
-#get_galleries
-	untuk menampilkan semua galleri dengan limit tertentu
+##Instalation
 
-#get_gallery_tags
-	untuk menampilkan semua tag pada gallery
+        composer require bcscoder/gallery
+    
+##Available Helpers
+- get_galleries($slideshow,$limit,$options[])
+            
+            pass 1 to slideshow, it will show you gallery for your slider.
+            
+- get_home_gallery($limit)
+            
+            it will list all galleries with limit for each tags.
+            
+- get_gallery_tags()
 
-#get_gallery_image
-	untuk menampilkan gambar dari gallery
+            it will list all tags of the gallery
+
+- gallery_image($gallery, $size = null)
+
+            it will return the thumnail of the gallery, and alse you can pass size of thumbnail

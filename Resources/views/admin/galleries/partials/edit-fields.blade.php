@@ -12,4 +12,12 @@
         <textarea class="ckeditor" name="{{$lang}}[description]" >{{ old("{$lang}.description",$old) }}</textarea>
         {!! $errors->first("{$lang}.description", '<span class="help-block">:message</span>') !!}
     </div>
+
+    <div class='{{ $errors->has("{$lang}.tags") ? ' has-error' : '' }} form-group'>
+        {!! Form::label("{$lang}[tags]", trans('gallery::galleries.form.tags')) !!}
+        <?php $old = $g->hasTranslation($lang) ? $g->translate($lang)->tags : '' ?>
+        <input class="form-control" type="text" name="{{$lang}}[tags]" value="{{ old("{$lang}.tags",$old) }}" />
+        {!! $errors->first("{$lang}.tags", '<span class="help-block">:message</span>') !!}
+    </div>
+
 </div>

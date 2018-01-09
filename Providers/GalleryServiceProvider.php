@@ -1,9 +1,11 @@
 <?php namespace Modules\Gallery\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Core\Traits\CanPublishConfiguration;
 
 class GalleryServiceProvider extends ServiceProvider
 {
+    use CanPublishConfiguration;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -23,6 +25,10 @@ class GalleryServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->publishConfig('gallery', 'config');
+        $this->publishConfig('gallery', 'permissions');
+        $this->publishConfig('gallery', 'settings');
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.gallery.config');
         $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.gallery.config' . '.php'), ], 'config');
     }
