@@ -17,8 +17,8 @@ class CreateGalleryGalleriesTable extends Migration
             $table->increments('id');
             $table->string('url')->nullable();
             $table->string('target')->nullable();
-            $table->tinyInteger('slideshow')->default(0);
-            $table->string('tag')->default('');
+						$table->tinyInteger('slideshow')->default(0);
+						$table->string('tag');
 		});
 	}
 

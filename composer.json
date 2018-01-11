@@ -23,8 +23,8 @@
     "prefer-stable": true,
 	"authors": [
 		{
-			"name": "bcscoder",
-			"email": "bcscoder@gmail.com"
+			"name": "Pingpong Labs",
+			"email": "pingpong.labs@gmail.com"
 		}
 	],
 	"autoload": {

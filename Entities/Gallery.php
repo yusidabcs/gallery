@@ -6,7 +6,7 @@ use Modules\Media\Support\Traits\MediaRelation;
 
 class Gallery extends Model
 {
-    use MediaRelation;
+	use MediaRelation;
     use Translatable;
 
     protected $table = 'gallery__galleries';
