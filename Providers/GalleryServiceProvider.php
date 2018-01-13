@@ -27,6 +27,7 @@ class GalleryServiceProvider extends ServiceProvider
     {
         $this->publishConfig('gallery', 'config');
         $this->publishConfig('gallery', 'permissions');
+        $this->publishConfig('gallery', 'settings');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.gallery.config');
         $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.gallery.config' . '.php'), ], 'config');
